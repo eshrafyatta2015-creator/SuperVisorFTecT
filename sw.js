@@ -1,5 +1,5 @@
 /* Service Worker — تخزين هيكل التطبيق للعمل دون اتصال */
-const VERSION = 'sup-v1.0.1';
+const VERSION = 'sup-v1.0.2';
 const SHELL = [
   './',
   'index.html',
@@ -15,7 +15,15 @@ const SHELL = [
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())
+    caches.open(VERSION).then(c =>
+      // جلب بدون الاعتماد على ذاكرة HTTP حتى لا تُعاد الملفات القديمة
+      Promise.all(SHELL.map(u =>
+        fetch(u, { cache: 'no-store' }).then(res => {
+          if (!res.ok) throw new Error('install fetch failed: ' + u);
+          return c.put(u, res);
+        })
+      ))
+    ).then(() => self.skipWaiting())
   );
 });
 
