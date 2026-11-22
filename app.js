@@ -446,7 +446,8 @@ installBtn.addEventListener('click', async () => {
   }
 });
 window.addEventListener('appinstalled', () => { installBtn.hidden = true; });
-if (isIOS) installBtn.hidden = false;
+// الزر ظاهر دائماً: يطلق التثبيت الأصلي عند توفره، وإلا يفتح شاشة التعليمات
+installBtn.hidden = false;
 
 /* ------------------ تحميل البيانات ------------------ */
 function saveCache(rows) {
