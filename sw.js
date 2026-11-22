@@ -1,5 +1,5 @@
 /* Service Worker — تخزين هيكل التطبيق للعمل دون اتصال */
-const VERSION = 'sup-v1.0.0';
+const VERSION = 'sup-v1.0.1';
 const SHELL = [
   './',
   'index.html',
