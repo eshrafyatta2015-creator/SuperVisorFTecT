@@ -427,8 +427,6 @@ $('#helpLink').addEventListener('click', e => { e.preventDefault(); openModal('i
 /* ------------------ التثبيت على الجهاز ------------------ */
 let deferredPrompt = null;
 const installBtn = $('#installBtn');
-const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) &&
-  !window.MSStream && !window.navigator.standalone;
 
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
